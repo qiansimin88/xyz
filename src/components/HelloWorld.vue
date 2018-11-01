@@ -1,22 +1,41 @@
 <template>
   <div class="test">
-    <h1>本场比赛得分： {{ $store.state.count }}</h1>
-    <button @click="$store.commit('add')">加分</button>
-    <button @click="$store.commit('reduce')">减分</button>
-    <router-link to="/ShowPage">Go to Bar</router-link>
+    <h1>本场比赛得分： {{ handlerCount }}</h1>
+    <button @click="addAction(3)">加分</button>
+    <button @click="reduce">减分</button>
+    <button @click="test">普通方法</button>
+    <router-link to="/show">Go to Bar</router-link>
   </div>
 </template>
 
 <script>
 import store from '@/vuex/store';
-
+// mapState: 是取数据的
+// mapMutations: 是取方法的（同步）
+//mapGetters: 是取经过过滤的数据的
+//mapActions:异步 处理方法
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 export default {
   name: 'HelloWorld',
   data() {
     return {
     };
   },
-  store
+  mounted () {
+  },
+  methods: {
+    ...mapMutations( [ 'add', 'reduce' ] ),  //...扩展运 算符解析对象  
+    ...mapActions( [ 'addAction' ] ),
+    test () {
+      console.log( 1111 );
+    }
+  },
+  // methods: mapMutations(['add']),
+  store,
+  computed: {
+    ...mapState( [ 'count' ] ),
+    ...mapGetters( ['handlerCount'] )
+  }
 };
 </script>
 

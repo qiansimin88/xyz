@@ -1,12 +1,12 @@
 <template>
   <div class="hello">
-    {{ $store.state.count }}
+    {{ count }}
   </div>
 </template>
 
 <script>
 import store from '@/vuex/store';
-
+import { mapState } from 'vuex';
 export default {
   name: 'HelloWorld',
   data() {
@@ -14,7 +14,8 @@ export default {
       msg: 'Welcome to Your Vue.js App',
     };
   },
-  store
+  store,
+  computed: mapState([ 'count' ])
 };
 </script>
 
