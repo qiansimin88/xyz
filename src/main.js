@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from './vuex/store';
 
 Vue.config.productionTip = false;
 
@@ -10,6 +11,8 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
+  //store注入到每个子组件中
+  store,
   components: { App },
   template: '<App/>',
 });

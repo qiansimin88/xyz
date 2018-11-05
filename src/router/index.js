@@ -2,11 +2,12 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import ShowPage from '@/components/ShowPage';
-
+import Login from '@/components/Login';
+import Store from '@/vuex/store.js';
 
 Vue.use(Router);
-
-export default new Router({
+//导航实例
+const  constInstanceRouter = new Router({
   mode: 'history',
   routes: [
     {
@@ -17,6 +18,38 @@ export default new Router({
       path: '/show',
       name: 'ShowPage',
       component: ShowPage,
+      //添加登录鉴权开关（路由级开关）
+      meta: {
+        requireAuth: true
+      }
     },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    }
   ],
 });
+
+//全局的路由导航守卫
+constInstanceRouter.beforeEach( ( to, from, next ) => {
+  //如果需要判断
+  if( to.meta.requireAuth ) {
+    //判断store是否有token
+    if( Store.state.token ) {
+      next();
+    }else {
+      // 跳转登录并且 带有referrer 方便回跳
+      next({
+        path: '/login',
+        query: {
+          referrer: to.fullPath 
+        }
+      })
+    }
+  }else {
+    next();
+  }
+} );
+
+export default constInstanceRouter;

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import store from '@/vuex/store';
 // mapState: 是取数据的
 // mapMutations: 是取方法的（同步）
 //mapGetters: 是取经过过滤的数据的
@@ -31,7 +30,6 @@ export default {
     }
   },
   // methods: mapMutations(['add']),
-  store,
   computed: {
     ...mapState( [ 'count' ] ),
     ...mapGetters( ['handlerCount'] )
@@ -41,5 +39,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
