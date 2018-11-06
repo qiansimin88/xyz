@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
-import ShowPage from '@/components/ShowPage';
-import Login from '@/components/Login';
+
+const HelloWorld = () => import('@/components/HelloWorld');
+const ShowPage = () => import('@/components/ShowPage');
+const Login = () => import('@/page/login');
+
 import Store from '@/vuex/store.js';
 
 Vue.use(Router);
