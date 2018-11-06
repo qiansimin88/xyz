@@ -21,6 +21,15 @@ export default {
     };
   },
   mounted () {
+    this.api.post('/baidu', {
+      name: 'qias'
+    })
+    .then( s => {
+      console.log( s );
+    } )
+    .catch( err => {
+      console.log( err );
+    } );
   },
   methods: {
     ...mapMutations( [ 'add', 'reduce' ] ),  //...扩展运 算符解析对象  

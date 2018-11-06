@@ -4,8 +4,10 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './vuex/store';
+import http from '@/http'
 
 Vue.config.productionTip = false;
+Vue.use( http );
 
 /* eslint-disable no-new */
 new Vue({

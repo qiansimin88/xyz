@@ -11,6 +11,17 @@ export default {
     return {
       msg: '',
     };
+  },
+  mounted () {
+           this.api.post('/baidu', {
+      name: 'qias'
+    })
+    .then( s => {
+      console.log( s );
+    } )
+    .catch( err => {
+      console.log( err );
+    } );
   }
 };
 </script>

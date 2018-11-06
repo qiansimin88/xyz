@@ -1,5 +1,6 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
+import * as types from './types';
 
 Vue.use( Vuex );
 
@@ -16,6 +17,10 @@ const mutations = {
     },
     reduce( state ) {
         state.count--; 
+    },
+    //清楚登录信息
+    [types.LOGIN_OUT] ( state ) {
+        state.token = null;
     }
 }
 
