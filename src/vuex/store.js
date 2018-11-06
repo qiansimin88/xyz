@@ -7,7 +7,7 @@ Vue.use( Vuex );
 //数据
 const state = {
     count: 1,
-    token: null
+    token: 2
 };
 
 //方法（同步）

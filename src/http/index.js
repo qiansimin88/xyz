@@ -9,6 +9,9 @@ const flyio = new fly;
 //通用配置
 flyio.config = {
     method: "POST",//请求方法， GET 、POST ...
+    headers: {
+        'Content-Type': 'application/json'
+    },
     baseURL: "/gateway",//请求基地址
     //是否自动将Content-Type为“application/json”的响应数据转化为JSON对象，默认为true
     parseJson: true,
@@ -17,7 +20,7 @@ flyio.config = {
 
 //http拦截器(请求)
 flyio.interceptors.request.use( request => {
-    console.log( `发起请求： path:${ request.url }, 参数：${ JSON.stringify(request.body) }` );
+    console.warn( `发起请求： path:${ request.url }, 参数：${ JSON.stringify(request.body) }` );
     //如果有token加上token在请求头上
     if( store.state.token ) {
         request.headers['x-auth-token'] = store.state.token;
@@ -26,7 +29,11 @@ flyio.interceptors.request.use( request => {
 } );
 
 flyio.interceptors.response.use( res => {
-    return res.data;
+    let responese = res.data;
+    if( responese.status !== 200 ) {
+        return Promise.reject( responese );
+    }
+    return responese;
 }, err => {
     //登录失效  跳转登录
     if( err.status === 401 ) {

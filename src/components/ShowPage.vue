@@ -15,6 +15,15 @@ export default {
     };
   },
   mounted () {
+       this.api.post('/demand/queryAllPageDemandByParam', {
+      demandQueryDto: {"state":"","title":"","user":"","sortField":"","sortType":""}
+    })
+    .then( s => {
+      console.log( s );
+    } )
+    .catch( err => {
+      console.log( err );
+    } );
   },
   store,
   computed: mapState([ 'count' ])
