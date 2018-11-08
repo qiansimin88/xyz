@@ -47,6 +47,17 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
+        test: /\.vue$/,
+        use: [
+          {
+            loader: 'iview-loader',
+            options: {
+              prefix: true  //true 可以使用前缀i-[组件名]  false: 可以骆驼写法任何组件
+            }
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
