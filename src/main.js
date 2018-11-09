@@ -5,13 +5,13 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './vuex/store';
-import Http from '@/http';
 import ComponentsInit  from '@/components/iviewComponents.js';
+import Http from '@/http';
 
 Vue.config.productionTip = false;
+ComponentsInit( Vue );
 Vue.use( Http );
 //初始化所有的组件
-ComponentsInit( Vue );
 
 /* eslint-disable no-new */
 new Vue({

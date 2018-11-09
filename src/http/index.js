@@ -2,9 +2,18 @@ import fly from 'flyio/dist/npm/fly';
 import store from '@/vuex/store';
 import * as types from '@/vuex/types';
 import router from '@/router';
+import { Message } from 'iview';
 
 const flyObj= Object.create( {} );
 const flyio = new fly;
+
+const handlerHttpStatusCode = ( { status, msg, data } ) => {
+    switch( ~~status ) {
+        case 600:
+            Message.error(msg);
+        break;
+    }
+}
 
 //通用配置
 flyio.config = {
@@ -30,9 +39,11 @@ flyio.interceptors.request.use( request => {
 
 flyio.interceptors.response.use( res => {
     let responese = res.data;
-    if( responese.status !== 200 ) {
-        return Promise.reject( responese );
-    }
+    handlerHttpStatusCode( responese );
+    // console.log( typeof responese.status );
+    // if( responese.status !== 200 ) {
+    //     return Promise.reject( responese );
+    // }
     return responese;
 }, err => {
     //登录失效  跳转登录
@@ -49,6 +60,8 @@ flyio.interceptors.response.use( res => {
 
 const httpInstance = flyObj.install = ( vue, options ) => {
     vue.prototype.api = flyio;
+    // console.log( Object.keys( vue ) );
+    // console.log( vue.component )
 }
 
 export default httpInstance;

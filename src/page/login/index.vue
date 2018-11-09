@@ -15,7 +15,7 @@
                 <div>
                   <input type="text" v-model="password" placeholder="Password"/>
                 </div>
-                <Button style="margin-top: 40px;" type="primary" shape="circle" long>Sign In</Button>
+                <Button @click="Login" :loading="loginLoading" style="margin-top: 40px;" type="primary" shape="circle" long>Sign In</Button>
             </div>
             <div>
                 go back to the past 
@@ -31,9 +31,27 @@ export default {
   data() {
     return {
       account: null,
-      password: null
+      password: null,
+      loginLoading: false
     };
   },
+  methods: {
+    Login () {
+      // this.$Message.info('This is a info tip');
+      if( this.loginLoading ) return;
+      this.loginLoading = true;
+      this.api.get('/user/doLogin', {
+        account: this.account,
+        password: this.password
+      })
+      .then( data => {
+        console.log( data );
+      } )
+      .catch( err => {
+        console.log( err );
+      } );
+    }
+  },  
   mounted () {
            this.api.post('/baidu', {
       name: 'qias'
@@ -62,7 +80,7 @@ export default {
       }
     }
     > div:nth-of-type(2) {
-      background: rgba(234,250,255,0.3); width: 100%; height: 480px;
+      background: rgba(234,250,255,1); width: 100%; height: 480px;
     }
   } 
   .qsm-login-area {

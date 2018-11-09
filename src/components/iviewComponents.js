@@ -76,7 +76,8 @@ import {
     Tooltip,
     Transfer,
     Tree,
-    Upload
+    Upload,
+    Message
 } from 'iview';
 
 //switch 和 circle 两个组件比较特步 必须前缀'i-'
@@ -158,6 +159,8 @@ let iViewList = {
 }
 
 export default Vue => {
+    //比较特别的组件是JS方法生成的 需要绑定在实例原型上 而不是 component注入
+    Vue.prototype.$Message = Message;
     Object.keys( iViewList ).map( keys => {
         Vue.component( keys, iViewList[keys] );
     } );
