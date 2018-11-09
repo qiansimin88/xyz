@@ -36,13 +36,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .qsm-login-bg {
-  height: 100%; width: 100%; background: url(https://cdnimg.3dker.cn/304cf47b54b48adda0e15093181de9a8@2565w_100q_1e_238-238-238bgc) no-repeat center center; position: fixed; left: 0; top: 0; background-size: cover;
+  height: 100%; width: 100%; background: url(https://cdnimg.3dker.cn/304cf47b54b48adda0e15093181de9a8@2565w_100q_1e_238-238-238bgc.jpg) no-repeat center center; position: fixed; left: 0; top: 0; background-size: cover;
   .qsm-login-box {
     position: fixed; right: 150px; bottom: 80px; width: 420px; height: 510px; 
     > div:nth-of-type(1) {
       color: #fff; font-size: 38px; text-align: center; display: flex;  justify-content: center;
       > span {
-        font-size: 46px; transform: rotate( 30deg ); padding-left: 10px; color:rgb(236,23,140);
+        font-size: 46px; transform: rotate( 30deg ); padding-left: 10px; color:rgba(234,250,255,.6);
       }
     }
     > div:nth-of-type(2) {
