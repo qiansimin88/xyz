@@ -62,7 +62,7 @@ export default {
       }
     }
     > div:nth-of-type(2) {
-      background: rgba(234,250,255,1); width: 100%; height: 480px;
+      background: rgba(234,250,255,0.3); width: 100%; height: 480px;
     }
   } 
   .qsm-login-area {
@@ -82,7 +82,7 @@ export default {
       }
     }
     > div:nth-of-type(3) {
-      margin: 60px 0 0 20px; color:rgba(234,250,255,1); font-size: 16px; font-family: "FS Albert Web",sans-serif;
+      margin: 60px 0 0 0px; color:rgba(234,250,255,1); font-size: 16px; font-family: "FS Albert Web",sans-serif; text-align: center;
     }
   }
 }
