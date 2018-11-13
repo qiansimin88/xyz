@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/gateway': {
-        target: 'http://develop.bops.api.3dker.cn',
+        target: 'http://test.bops.api.3dker.cn',
         changeOrigin: true,
         pathRewrite: {
           '^/gateway': ''
