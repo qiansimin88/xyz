@@ -36,7 +36,7 @@ flyio.config = {
     headers: {
         'Content-Type': 'application/json'
     },
-    baseURL: "http://develop.bops.api.3dker.cn/",//请求基地址
+    baseURL: "/gateway",//请求基地址
     //是否自动将Content-Type为“application/json”的响应数据转化为JSON对象，默认为true
     parseJson: true,
     timeout: "5000"//超时时间
