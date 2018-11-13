@@ -47,7 +47,7 @@ flyio.interceptors.request.use( request => {
     console.warn( `发起请求： path:${ request.url }, 参数：${ JSON.stringify(request.body) }` );
     //如果有token加上token在请求头上
     if( store.state.token ) {
-        request.headers['x-auth-token'] = store.state.token;
+        request.headers['token'] = store.state.token;
     }
     return Promise.resolve( request );
 } );

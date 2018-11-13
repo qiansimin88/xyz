@@ -6,7 +6,9 @@
         </div>
         <div class="qsm-login-area">
             <div>
-              <img src="http://cdnimg.3dker.cn/e4c4a3d841a4391b3d8c4198fbbded6f@70w_100q_1e.png" alt="">
+              <!-- http://cdnimg.3dker.cn/e4c4a3d841a4391b3d8c4198fbbded6f@70w_100q_1e.png -->
+              <!-- https://test-img.3dker.cn//152eb51ae156e986a23d13eb52f476db@85w_60h_1e_1c_90q -->
+              <img src="https://test-img.3dker.cn//152eb51ae156e986a23d13eb52f476db@85w_60h_1e_1c_90q" alt="">
             </div>
             <div>
                 <div>
@@ -48,7 +50,10 @@ export default {
           } )
           .catch( err => {
             console.log( err );
-          } );
+          } )
+          .finally ( _ => {
+            this.loginLoading = false;
+          } ); 
     }
   },  
   mounted () {
