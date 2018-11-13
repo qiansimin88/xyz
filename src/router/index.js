@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 const HelloWorld = () => import('@/components/HelloWorld');
 const ShowPage = () => import('@/components/ShowPage');
-const Login = () => import('@/page/login');
+const Login = () => import('@/page/login/index.vue');
 
 import Store from '@/vuex/store.js';
 

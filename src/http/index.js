@@ -7,7 +7,7 @@ import { Message } from 'iview';
 const flyObj= Object.create( {} );
 const flyio = new fly;
 
-const handlerHttpStatusCode = ( { status, msg, data } ) => {
+const handlerHttpStatusCodeSuccess = ( { status, msg, data } ) => {
     switch( ~~status ) {
         case 600:
             Message.error(msg);
@@ -15,13 +15,28 @@ const handlerHttpStatusCode = ( { status, msg, data } ) => {
     }
 }
 
+
+const handlerHttpStatusCodeFail = ( { status, message, response, request } ) => {
+    switch( ~~status ) {
+        case 500:
+            Message.error('网络错误');
+            console.error( `${ request.url }：接口请求失败` );
+        break;
+        case 404:
+            Message.error('请求无效');
+            console.error( `${ request.url }：接口请求无效` );
+        break;
+    }
+}
+
+
 //通用配置
 flyio.config = {
     method: "POST",//请求方法， GET 、POST ...
     headers: {
         'Content-Type': 'application/json'
     },
-    baseURL: "/gateway",//请求基地址
+    baseURL: "http://develop.bops.api.3dker.cn/",//请求基地址
     //是否自动将Content-Type为“application/json”的响应数据转化为JSON对象，默认为true
     parseJson: true,
     timeout: "5000"//超时时间
@@ -39,21 +54,21 @@ flyio.interceptors.request.use( request => {
 
 flyio.interceptors.response.use( res => {
     let responese = res.data;
-    handlerHttpStatusCode( responese );
-    // console.log( typeof responese.status );
-    // if( responese.status !== 200 ) {
-    //     return Promise.reject( responese );
-    // }
+    if( responese.status !== 'ok' ) {
+        handlerHttpStatusCodeSuccess( responese );
+        return Promise.reject( responese );
+    }
     return responese;
 }, err => {
+    handlerHttpStatusCodeFail( err );
     //登录失效  跳转登录
-    if( err.status === 401 ) {
-        store.commit( types.LOGIN_OUT );
-        router.replace( {
-            path: '/login',
-            query: router.currentRoute.fullPath
-        } )
-    }
+    // if( err.status === 401 ) {
+    //     store.commit( types.LOGIN_OUT );
+    //     router.replace( {
+    //         path: '/login',
+    //         query: router.currentRoute.fullPath
+    //     } )
+    // }
     return Promise.reject( err );
 } );
 
@@ -64,4 +79,4 @@ const httpInstance = flyObj.install = ( vue, options ) => {
     // console.log( vue.component )
 }
 
-export default httpInstance;
+export { httpInstance, flyio };

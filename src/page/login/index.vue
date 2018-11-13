@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Login',
   data() {
@@ -36,24 +37,22 @@ export default {
     };
   },
   methods: {
+    ...mapActions( ['login'] ),
     Login () {
-      // this.$Message.info('This is a info tip');
+      let { account, password } = this; 
       if( this.loginLoading ) return;
-      this.loginLoading = true;
-      this.api.get('/user/doLogin', {
-        account: this.account,
-        password: this.password
-      })
-      .then( data => {
-        console.log( data );
-      } )
-      .catch( err => {
-        console.log( err );
-      } );
+        this.loginLoading = true;
+        this.login( { account, password } )
+          .then( data => {
+              this.$Message.info('登录成功');
+          } )
+          .catch( err => {
+            console.log( err );
+          } );
     }
   },  
   mounted () {
-           this.api.post('/baidu', {
+    this.api.post('/baidu', {
       name: 'qias'
     })
     .then( s => {
@@ -70,7 +69,7 @@ export default {
 <style lang="less" scoped>
 .qsm-login-bg {
   // https://cdnimg.3dker.cn/304cf47b54b48adda0e15093181de9a8@2565w_100q_1e_238-238-238bgc.jpg
-  height: 100%; width: 100%; background: url() no-repeat center center; position: fixed; left: 0; top: 0; background-size: cover;
+  height: 100%; width: 100%; background: url(https://cdnimg.3dker.cn/304cf47b54b48adda0e15093181de9a8@2565w_100q_1e_238-238-238bgc.jpg) no-repeat center center; position: fixed; left: 0; top: 0; background-size: cover;
   .qsm-login-box {
     position: fixed; right: 160px; bottom: 90px; width: 420px; height: 510px; 
     > div:nth-of-type(1) {
@@ -80,7 +79,7 @@ export default {
       }
     }
     > div:nth-of-type(2) {
-      background: rgba(234,250,255,1); width: 100%; height: 480px;
+      background: rgba(234,250,255,0.3); width: 100%; height: 480px;
     }
   } 
   .qsm-login-area {

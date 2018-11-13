@@ -4,13 +4,13 @@ import Vue from 'vue';
 // import iView from 'iview';   //全部引用 因为采用了按需加载  所以这里就不应该这样引用了 
 import App from './App';
 import router from './router';
+import { httpInstance } from '@/http';
 import store from './vuex/store';
 import ComponentsInit  from '@/components/iviewComponents.js';
-import Http from '@/http';
 
 Vue.config.productionTip = false;
 ComponentsInit( Vue );
-Vue.use( Http );
+Vue.use( httpInstance );
 //初始化所有的组件
 
 /* eslint-disable no-new */
