@@ -4,6 +4,7 @@ import Router from 'vue-router';
 const HelloWorld = () => import('@/components/HelloWorld');
 const ShowPage = () => import('@/components/ShowPage');
 const Login = () => import('@/page/login/index.vue');
+const stlview = () => import('@/page/stlview/index.vue');
 
 import Store from '@/vuex/store.js';
 
@@ -29,6 +30,11 @@ const  constInstanceRouter = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/stlview',
+      name: 'stlview',
+      component: stlview
     }
   ],
 });
