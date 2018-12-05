@@ -21,7 +21,7 @@
     "three": "^0.96.0",
     "three-obj-mtl-loader": "^1.0.3",
     "three-orbitcontrols": "^2.96.3",
-    "three-stl-loader": "^1.0.6",
+    "three-stl-loader": "^1.0.5",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

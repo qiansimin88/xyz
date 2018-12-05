@@ -7,11 +7,43 @@
 // import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols'; //鼠标 旋转 平移  缩放
-import {MTLLoader,OBJLoader} from 'three-obj-mtl-loader';
+import { MTLLoader,OBJLoader } from 'three-obj-mtl-loader';
 import * as dat from 'dat.gui';
 import { resolve } from 'url';
 // import STLLoader from '@/utils/loader/STLLoader.js';  
-import STLLoader from 'three-stl-loader';  
+// import STLLoader from 'three-stl-loader';  
+var STLLoader = require('three-stl-loader')(THREE);
+
+    console.log( STLLoader );
+
+
+var modelStl = require( './ji.stl' );
+// console.log( modelStl );
+
+function getDataURL(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        callback(event.target.result);
+    };
+    reader.readAsDataURL(file);
+}
+
+function dataURItoBlob(dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    var blob = new Blob([ab], {
+        type: mimeString
+    });
+    return blob;
+}
+
 export default {
   name: 'stlview',
   data() {
@@ -37,21 +69,31 @@ export default {
           this.initControls();
           // this.initMeshBox();
           this.initRender();
-          this.initModel();
           this.initAnimate();
+          this.initModel();
         } )
     },
     initModel () {
-      var STLLoader = require('three-stl-loader')(THREE);
-      this.stlLoader = new STLLoader();
-      this.stlLoader.load( './1111.stl', function ( geometry ) {
-        var mat = new THREE.MeshLambertMaterial({color: 0x00ffff});
-        var mesh = new THREE.Mesh( geometry, mat );
-        mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
-        mesh.scale.set(0.1, 0.1, 0.1); //缩放
-        geometry.center();
-        this.scene.add( mesh );
-      } )
+      // this.stlLoader = new STLLoader();
+      // getDataURL( new Blob( ['./1111.stl'], { type: 'application/vnd.ms-pki.stl' }), function ( ed ) {
+      //     that.stlLoader.load( form.values, function ( geometry ) {
+      //       var mat = new THREE.MeshLambertMaterial({color: 0x00ffff});
+      //       var mesh = new THREE.Mesh( geometry, mat );
+      //       mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
+      //       mesh.scale.set(0.1, 0.1, 0.1); //缩放
+      //       geometry.center();
+      //       that.scene.add( mesh );
+      //     } )
+      // } );
+        STLLoader.load( './ji.stl', ( geometry ) => {
+            console.log( geometry );
+            var mat = new THREE.MeshLambertMaterial({color: 0x00ffff});
+            var mesh = new THREE.Mesh( geometry, mat );
+            mesh.rotation.x = -0.5 * Math.PI; //将模型摆正
+            mesh.scale.set(0.1, 0.1, 0.1); //缩放
+            geometry.center();
+            this.scene.add( mesh );
+        } );
     },
     initMeshBox () {
       var geometry = new THREE.BoxGeometry( 1, 1, 1 );
