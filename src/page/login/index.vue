@@ -31,6 +31,14 @@
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Login',
+  asyncData ({ store, route }) {
+    return store.dispatch('login', 'xxi');
+  },
+  computed: {
+    item () {
+      return this.$store.state.items[1]
+    }
+  },
   data() {
     return {
       account: null,

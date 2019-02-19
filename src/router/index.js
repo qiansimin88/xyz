@@ -36,7 +36,7 @@ const  constInstanceRouter = new Router({
       name: 'stlview',
       component: stlview
     }
-  ],
+  ]
 });
 
 //全局的路由导航守卫
