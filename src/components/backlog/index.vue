@@ -3,11 +3,11 @@
     <!--操作头部-->
     <div class="header">
       <div class="arow">
-        <div class="left-arow">
+        <div class="left-arow" @click="prewMonth">
         </div>
       </div>
       <div class="show-area">
-        2019年3月
+        {{ showDate }}
       </div>
       <div class="arow">
         <div class="right-arow">
@@ -38,7 +38,8 @@ export default {
   data() {
     return {
       weekList: ['一', '二', '三', '四', '五', '六', '日'],
-      days: []
+      days: [],
+      showDate: ''
     };
   },
   props: {
@@ -58,8 +59,14 @@ export default {
         default: new Date().getTime()
       }
   },
+  created () {
+    this.showDate = `${UTILS.dateGetNumbers(this.date, 'y')}年${UTILS.dateGetNumbers(this.date, 'm')}月`
+  },
   mounted () {
     this.init();
+  },
+  computed: {
+    
   },
   methods: {
     init() {
@@ -68,6 +75,11 @@ export default {
     //接受日期 渲染当前月
     renderList ( date ) {
       this.days = UTILS.pageDays( date );
+    },
+    //上个月
+    prewMonth () {
+      this.date = UTILS.changeMonth( this.date, 'prew' );
+      // this.$emit( 'prewMonth', this.date );
     }
   }
 };

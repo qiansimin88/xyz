@@ -32,6 +32,18 @@ export const oneDayIsHow = (date = nowTime) => {
   return d;
 };
 
+// 上下个月
+export const changeMonth = (date = nowTime, way = 'prew') => {
+  const itemDate = new Date(date);
+  let r = null;
+  if (way === 'prew') {
+    r = itemDate.setMonth(itemDate.getMonth() - 1);
+  } else if (way === 'next') {
+    r = itemDate.setMonth(itemDate.getMonth() + 1);
+  }
+  return r;
+};
+
 // 返回当前月上个月的末尾几天的显示
 export const leftDate = (date = nowTime) => {
   const arr = [];

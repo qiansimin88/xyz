@@ -5,12 +5,12 @@
     <button @click="reduce">减分</button>
     <button @click="test">普通方法</button>
     <router-link to="/show">Go to Bar</router-link>
-    <Calendar
+    <!-- <Calendar
       v-on:choseDay="clickDay"
       v-on:changeMonth="changeDate"
       :markDate="arr"
       :sundayStart='true'
-    ></Calendar>
+    ></Calendar> -->
     <Backlog 
       :date = 'date'
       :style-prop=" {
