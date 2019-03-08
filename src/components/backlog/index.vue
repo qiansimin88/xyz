@@ -20,7 +20,7 @@
     </div>
     <div class="day-block">
       <div class="day-item" v-for=" (o, index) in days " :key="index">
-        <div class="show-day" :class="{ 'during-month': !o.duringMonth }">
+        <div class="show-day" :class="{ 'during-month': !o.duringMonth, 'isToday': o.isToday }">
           {{ o.showDay }}
         </div>
         <div class="show-tips" v-show="index === 3 || index === 5 || index === 11">
@@ -86,6 +86,9 @@ export default {
        height: 30px; text-align: center; line-height: 30px; color: #fff; font-size: 14px;
        &.during-month {
          color: #bfbfbf;
+       }
+       &.isToday {
+         color: red;
        }
      }
      .show-tips {

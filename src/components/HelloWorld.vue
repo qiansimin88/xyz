@@ -35,7 +35,7 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      date: new Date().setMonth(4),
+      date: new Date().getTime(),
       arr: ['2019/3/1','2019/4/3'] ,
       demoEvents: [{
         date: '2019/3/12', // 必填
