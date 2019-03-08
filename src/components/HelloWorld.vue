@@ -11,7 +11,13 @@
       :markDate="arr"
       :sundayStart='true'
     ></Calendar>
-    <Backlog>
+    <Backlog 
+      :date = 'date'
+      :style-prop=" {
+                    'width': '410px',
+                    'height': '384px',
+                    'background': '#0074ff'
+                }">
     </Backlog>
   </div>
 </template>
@@ -29,6 +35,7 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
+      date: new Date().setMonth(4),
       arr: ['2019/3/1','2019/4/3'] ,
       demoEvents: [{
         date: '2019/3/12', // 必填

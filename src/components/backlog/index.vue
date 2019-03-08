@@ -1,5 +1,5 @@
 <template>
- <div class="backlog" :style="style">
+ <div class="backlog" :style="styleProp">
     <!--操作头部-->
     <div class="header">
       <div class="arow">
@@ -19,12 +19,12 @@
       </div>
     </div>
     <div class="day-block">
-      <div class="day-item" v-for=" (o, index) in 14 ">
-        <div class="show-day">
-          {{ o }}
+      <div class="day-item" v-for=" (o, index) in days " :key="index">
+        <div class="show-day" :class="{ 'during-month': !o.duringMonth }">
+          {{ o.showDay }}
         </div>
         <div class="show-tips" v-show="index === 3 || index === 5 || index === 11">
-          哈
+          2
         </div>
       </div>
     </div>
@@ -32,26 +32,43 @@
 </template>
 
 <script>
+import * as UTILS from './index.js';
 export default {
   name: 'backlog',
   data() {
     return {
-      weekList: ['一', '二', '三', '四', '五', '六', '日']
+      weekList: ['一', '二', '三', '四', '五', '六', '日'],
+      days: []
     };
   },
   props: {
-      style: {
+      styleProp: {
             type: Object,
             default () {
                 return {
                     'width': '410px',
-                    'height': '355px',
+                    'height': '384px',
                     'background': '#0074ff'
                 }
           }
+      },
+      //显示的月份 默认当前时间
+      date: {
+        type: [Number, String],
+        default: new Date().getTime()
       }
   },
   mounted () {
+    this.init();
+  },
+  methods: {
+    init() {
+      this.renderList( this.date );
+    },
+    //接受日期 渲染当前月
+    renderList ( date ) {
+      this.days = UTILS.pageDays( date );
+    }
   }
 };
 </script>
@@ -66,7 +83,10 @@ export default {
    .day-item {
      width: 14.2%; height: 50px; cursor: pointer; 
      .show-day {
-       height: 30px; text-align: center; line-height: 30px; color: #fff; font-size: 12px;
+       height: 30px; text-align: center; line-height: 30px; color: #fff; font-size: 14px;
+       &.during-month {
+         color: #bfbfbf;
+       }
      }
      .show-tips {
        text-align: center; height: 20px; width: 50%; background: #fff; border-radius:8px; margin: 0 auto; line-height: 20px; cursor: pointer;
