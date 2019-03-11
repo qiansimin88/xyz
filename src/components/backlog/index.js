@@ -60,6 +60,7 @@ export const leftDate = (date = nowTime) => {
       showDay: index,
       duringMonth: false, // 是否在当前月
       isToday: false,
+      action: () => {},
     });
   }
   return arr;
@@ -77,6 +78,7 @@ export const nowMonthDate = (date = nowTime) => {
       showDay: index,
       duringMonth: true, // 是否在当前月
       isToday: standardDateForString(element) === standardDateForString(new Date().getTime()),
+      action: () => {},
     });
   }
   return arr;
@@ -95,6 +97,7 @@ export const nextMonthDate = (date = nowTime) => {
       showDay: index,
       duringMonth: false, // 是否在当前月
       isToday: false,
+      action: () => {},
     });
   }
   return arr;

@@ -26,8 +26,8 @@
         <div class="show-day" :class="{ 'during-month': !o.duringMonth, 'isToday': o.isToday }">
           {{ o.showDay }}
         </div>
-        <div class="show-tips" v-show="index === 3 || index === 5 || index === 11">
-          2
+        <div v-if="o.count" @click="handlerToDo( o )" class="show-tips">
+          {{ o.count }}
         </div>
       </div>
     </div>
@@ -48,6 +48,7 @@ export default {
     };
   },
   props: {
+      // 待办事项
       todoArray: {
         type: Array
       },
@@ -79,10 +80,25 @@ export default {
     init() {
       this.renderList( this.itemDate );
       this.showDate = `${UTILS.dateGetNumbers(this.itemDate, 'y')}年${UTILS.dateGetNumbers(this.itemDate, 'm')}月`
+      this.handlerToDoList();
     },
     //接受日期 渲染当前月
     renderList ( date ) {
       this.days = UTILS.pageDays( date );
+    },
+    handlerToDoList() {
+      if( this.todoArray && this.todoArray.length )
+      this.days.map(days => {
+        this.todoArray.map(toDo => {
+          if( days.date === toDo.date ) {
+            days.count = toDo.count;
+            days.action = toDo.action;
+          }
+        });
+      }); 
+    },
+    handlerToDo( days ) {
+      return days.action( days );
     },
     //上个月
     changeMonth( way ) {

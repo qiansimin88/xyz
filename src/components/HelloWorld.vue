@@ -13,6 +13,23 @@
     ></Calendar> -->
     <Backlog 
       @changeMonth='changeMonth'
+      :todoArray="[
+        {
+          date: '2019/3/7',
+          count: 20,
+          action: toDo
+        },
+        {
+          date: '2019/3/9',
+          count: 4,
+          action: toDo
+        },
+        {
+          date: '2019/4/26',
+          count: 10,
+          action: toDo
+        }
+      ]"
       :date = 'date'
       :style-prop=" {
                     'width': '410px',
@@ -65,6 +82,9 @@ export default {
     // } );
   },
   methods: {
+    toDo( h ) {
+      console.log(h);
+    },
     changeMonth(date, way) {
       console.log( date, way );
     },
