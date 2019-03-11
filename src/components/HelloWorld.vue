@@ -12,6 +12,7 @@
       :sundayStart='true'
     ></Calendar> -->
     <Backlog 
+      @changeMonth='changeMonth'
       :date = 'date'
       :style-prop=" {
                     'width': '410px',
@@ -64,6 +65,9 @@ export default {
     // } );
   },
   methods: {
+    changeMonth(date, way) {
+      console.log( date, way );
+    },
     clickDay(data) {
       console.log(data); //选中某天
     },

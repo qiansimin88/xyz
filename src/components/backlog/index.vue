@@ -2,14 +2,17 @@
  <div class="backlog" :style="styleProp">
     <!--操作头部-->
     <div class="header">
-      <div class="arow">
-        <div class="left-arow" @click="prewMonth">
+      <div class="action-btn" @click="goOneDay(nowTime)">
+        今天
+      </div>
+      <div class="arow" @click="changeMonth('prew')">
+        <div class="left-arow" >
         </div>
       </div>
       <div class="show-area">
         {{ showDate }}
       </div>
-      <div class="arow">
+      <div class="arow"  @click="changeMonth('next')">
         <div class="right-arow">
         </div>
       </div>
@@ -37,12 +40,17 @@ export default {
   name: 'backlog',
   data() {
     return {
+      nowTime: new Date().getTime(),
       weekList: ['一', '二', '三', '四', '五', '六', '日'],
       days: [],
-      showDate: ''
+      showDate: '',
+      itemDate: ''  // 临时时间
     };
   },
   props: {
+      todoArray: {
+        type: Array
+      },
       styleProp: {
             type: Object,
             default () {
@@ -60,26 +68,39 @@ export default {
       }
   },
   created () {
-    this.showDate = `${UTILS.dateGetNumbers(this.date, 'y')}年${UTILS.dateGetNumbers(this.date, 'm')}月`
-  },
-  mounted () {
+    this.itemDate = this.date;
     this.init();
   },
+  mounted () {
+  },
   computed: {
-    
   },
   methods: {
     init() {
-      this.renderList( this.date );
+      this.renderList( this.itemDate );
+      this.showDate = `${UTILS.dateGetNumbers(this.itemDate, 'y')}年${UTILS.dateGetNumbers(this.itemDate, 'm')}月`
     },
     //接受日期 渲染当前月
     renderList ( date ) {
       this.days = UTILS.pageDays( date );
     },
     //上个月
-    prewMonth () {
-      this.date = UTILS.changeMonth( this.date, 'prew' );
-      // this.$emit( 'prewMonth', this.date );
+    changeMonth( way ) {
+      this.itemDate = UTILS.changeMonth( this.itemDate, way );
+      this.$emit( 'changeMonth', this.itemDate, way );
+      this.init();
+    },
+    //去任意一天的所在月 时间戳 或者 '2015/2/2'
+    goOneDay( date ) {  
+      try {
+        if( typeof date === 'String' ) {
+          date = new Date(date.toString()).getTime();
+        }
+        this.itemDate = date;
+        this.init();
+      }catch( e ) {
+        console.warn("date type must be timestamp or '2017/2/2'!");
+      }
     }
   }
 };
@@ -87,6 +108,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.action-btn {
+  .flex; color: #fff; flex: 0.5; cursor: pointer; font-size: 14px; 
+}
 .flex(@content: flex-start, @wrap: nowrap) {
   display: flex; justify-content: @content; align-items: center; flex-wrap: @wrap;
 }

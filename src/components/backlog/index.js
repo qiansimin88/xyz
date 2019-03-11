@@ -27,7 +27,7 @@ export const theMonthDays = (date = nowTime) => {
 
 // 返回某个月的一号 是星期几
 export const oneDayIsHow = (date = nowTime) => {
-  let d = new Date(date).getDay();
+  let d = new Date(new Date(date).setDate(1)).getDay();
   if (d === 0) d = 7;
   return d;
 };
@@ -76,7 +76,7 @@ export const nowMonthDate = (date = nowTime) => {
       count: 0,
       showDay: index,
       duringMonth: true, // 是否在当前月
-      isToday: dateGetNumbers(element, 'd') === dateGetNumbers(new Date().getTime(), 'd'),
+      isToday: standardDateForString(element) === standardDateForString(new Date().getTime()),
     });
   }
   return arr;
