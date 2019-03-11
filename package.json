@@ -18,6 +18,7 @@
   "dependencies": {
     "cross-env": "^5.2.0",
     "dat.gui": "^0.7.3",
+    "echarts": "^4.1.0",
     "flyio": "^0.6.2",
     "iview": "^3.1.4",
     "store": "^2.0.12",
