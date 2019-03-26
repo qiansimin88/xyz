@@ -17,7 +17,7 @@ router.onReady((_) => {
     // 所以我们对比它们，找出两个匹配列表的差异组件
     let diffed = false;
 
-    const activated = matched.filter((c, i) => diffed || ( diffed = ( prevMathched[i] !== c ) ));
+    const activated = matched.filter((c, i) => diffed || (diffed = (prevMathched[i] !== c)));
 
     if (!activated.length) {
       return next();
