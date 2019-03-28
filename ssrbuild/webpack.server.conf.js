@@ -3,11 +3,8 @@ const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
 const baseConfig = require('./webpack.base.conf.js');
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
-const config = require('../config');
 
-// baseConfig.module.rules.splice( baseConfig.module.rules.length - 1, 1 )  //去除打包CSS
-
-console.log(baseConfig.module.rules);
+baseConfig.module.rules[1].options = '';
 
 module.exports = merge(baseConfig, {
   // 将 entry 指向应用程序的 server entry 文件
@@ -38,6 +35,10 @@ module.exports = merge(baseConfig, {
   // 构建为单个 JSON 文件的插件。
   // 默认文件名为 `vue-ssr-server-bundle.json`
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.VUE_ENV': '"server"',
+    }),
     new VueSSRServerPlugin(),
   ],
 });
