@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import Store from '@/vuex/store.js';
+
 const HelloWorld = () => import('@/components/HelloWorld');
 const ShowPage = () => import('@/components/ShowPage');
 const Login = () => import('@/page/login/index.vue');
 const stlview = () => import('@/page/stlview/index.vue');
 
-import Store from '@/vuex/store.js';
-
 Vue.use(Router);
-//导航实例
-const  constInstanceRouter = new Router({
+// 导航实例
+const constInstanceRouter = new Router({
   mode: 'history',
   routes: [
     {
@@ -21,43 +21,43 @@ const  constInstanceRouter = new Router({
       path: '/show',
       name: 'ShowPage',
       component: ShowPage,
-      //添加登录鉴权开关（路由级开关）
+      // 添加登录鉴权开关（路由级开关）
       meta: {
-        requireAuth: true
-      }
+        requireAuth: true,
+      },
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
     },
     {
       path: '/stlview',
       name: 'stlview',
-      component: stlview
-    }
-  ]
+      component: stlview,
+    },
+  ],
 });
 
-//全局的路由导航守卫
-constInstanceRouter.beforeEach( ( to, from, next ) => {
-  //如果需要判断
-  if( to.meta.requireAuth ) {
-    //判断store是否有token
-    if( Store.state.token ) {
+// 全局的路由导航守卫
+constInstanceRouter.beforeEach((to, from, next) => {
+  // 如果需要判断
+  if (to.meta.requireAuth) {
+    // 判断store是否有token
+    if (Store.state.token) {
       next();
-    }else {
+    } else {
       // 跳转登录并且 带有referrer 方便回跳
       next({
         path: '/login',
         query: {
-          referrer: to.fullPath 
-        }
-      })
+          referrer: to.fullPath,
+        },
+      });
     }
-  }else {
+  } else {
     next();
   }
-} );
+});
 
 export default constInstanceRouter;

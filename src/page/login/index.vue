@@ -54,7 +54,11 @@ export default {
         this.loginLoading = true;
         this.login( { account, password } )
           .then( data => {
-              this.$Message.info('登录成功');
+              // this.$Message.info('登录成功');
+              this.$Notice.config({
+                  top: 50,
+                  duration: 3
+              });
           } )
           .catch( err => {
             console.log( err );
