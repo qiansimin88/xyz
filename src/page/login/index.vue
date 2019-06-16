@@ -31,6 +31,14 @@
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Login',
+  asyncData ({ store, route }) {
+    return store.dispatch('login', 'xxi');
+  },
+  computed: {
+    item () {
+      return this.$store.state.items[1]
+    }
+  },
   data() {
     return {
       account: null,
@@ -46,7 +54,11 @@ export default {
         this.loginLoading = true;
         this.login( { account, password } )
           .then( data => {
-              this.$Message.info('登录成功');
+              // this.$Message.info('登录成功');
+              this.$Notice.config({
+                  top: 50,
+                  duration: 3
+              });
           } )
           .catch( err => {
             console.log( err );
