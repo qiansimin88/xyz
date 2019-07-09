@@ -1,6 +1,12 @@
 <template>
   <div class="test">
     更新122223333222256
+    <div>
+    {{ a.c }}
+    </div>
+    <div>
+      {{ a.kk }}
+    </div>
     <h1>本场比赛得分： {{ handlerCount }}</h1>
     <button @click="addAction(3)">加分</button>
     <button @click="reduce">减分</button>
@@ -15,13 +21,40 @@
 //mapGetters: 是取经过过滤的数据的
 //mapActions:异步 处理方法
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
+import { setTimeout } from 'timers';
 export default {
   name: 'HelloWorld',
   data() {
     return {
-    };
+      a: {
+        c: 1
+      }
+    }
+  },
+  beforeCreate () {
+    console.log('beforeCreate');
+    console.log( this.a.c );
+    console.log( this.$el );
+  },
+  created () {
+    console.log('created');
+    console.log( this.a.c );
+    console.log( this.$el );
+
+    this.$nextTick(() => {
+      console.log('33333333');
+      console.log( this.$el );
+    })
+  },
+  beforeMount () {
+    console.log('beforeMount');
+    console.log( this.a.c );
+    console.log( this.$el );
   },
   mounted () {
+    console.log('mounted');
+    console.log( this.a.c );
+    console.log( this.$el );
     this.api.post('/baidu', {
       name: 'qias'
     })
