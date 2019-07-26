@@ -1,5 +1,8 @@
 <template>
   <div class="test">
+    <div id="huafei">
+asdasdas
+    </div>
     更新122223333222256
     <div>
     {{ a.c }}
@@ -33,18 +36,18 @@ export default {
   },
   beforeCreate () {
     console.log('beforeCreate');
-    console.log( this.a.c );
+    // console.log( this.a.c );
     console.log( this.$el );
   },
   created () {
     console.log('created');
-    console.log( this.a.c );
+    // console.log( this.a.c );
     console.log( this.$el );
 
-    this.$nextTick(() => {
-      console.log('33333333');
-      console.log( this.$el );
-    })
+    // this.$nextTick(() => {
+    //   console.log('33333333');
+    //   console.log( this.$el );
+    // })
   },
   beforeMount () {
     console.log('beforeMount');
@@ -52,6 +55,13 @@ export default {
     console.log( this.$el );
   },
   mounted () {
+    window.onload = function () {
+      var h = document.getElementById('huafei').offsetHeight;
+      console.log( h );
+      console.log('发送');
+      // console.log( window.parent )
+      window.parent.postMessage({height: h}, '*')
+    }
     console.log('mounted');
     console.log( this.a.c );
     console.log( this.$el );
@@ -82,4 +92,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#huafei {
+  height: 300px; background: red; border: 2px solid black;
+}
 </style>
