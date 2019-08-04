@@ -29,6 +29,8 @@
 
 <script>
 import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
+import * as test from '@/components/ShowPage.vue';
+console.log( test );
 export default {
   name: 'Login',
   data() {
