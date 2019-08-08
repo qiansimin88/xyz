@@ -3,7 +3,6 @@
     <div id="huafei">
 asdasdas
     </div>
-    更新122223333222256
     <div>
     {{ a.c }}
     </div>
