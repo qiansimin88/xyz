@@ -14,6 +14,7 @@ asdasdas
     <button @click="reduce">减分</button>
     <button @click="test">普通方法</button>
     <router-link to="/show">Go to Bar</router-link>
+    1111
   </div>
 </template>
 
