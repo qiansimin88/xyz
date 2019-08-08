@@ -8,6 +8,7 @@ asdasdas
     </div>
     <div>
       {{ a.kk }}
+      hahahahahhah
     </div>
     <h1>本场比赛得分： {{ handlerCount }}</h1>
     <button @click="addAction(3)">加分</button>
