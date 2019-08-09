@@ -12,7 +12,7 @@ Vue.use(Router);
 //导航实例
 const  constInstanceRouter = new Router({
   mode: 'history',
-  base: '/showtime/',
+  // base: '/showtime/',
   routes: [
     {
       path: '/',
