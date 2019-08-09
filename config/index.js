@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/erji/',
+    assetsPublicPath: '/',
     proxyTable: {
       '/gateway': {
         target: 'http://test.bops.api.3dker.cn',
@@ -57,7 +57,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/erji/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
