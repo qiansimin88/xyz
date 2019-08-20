@@ -75,7 +75,7 @@ export default {
         } )
     },
     initModel () {
-      console.log(111);
+      console.log(1111);
       // this.stlLoader = new STLLoader();
       // getDataURL( new Blob( ['./1111.stl'], { type: 'application/vnd.ms-pki.stl' }), function ( ed ) {
       //     that.stlLoader.load( form.values, function ( geometry ) {
